@@ -162,13 +162,12 @@ class Results extends React.Component{
   componentDidMount() {
     $.ajax({
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
-      dataType: 'jsonp',
+      dataType: 'json',
       success: function(response) {
         console.log(response)
       }.bind(this),
       error: function(xhr, status, err) {
         console.log('error!', xhr, status, err)
-        console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   }
