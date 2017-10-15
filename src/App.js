@@ -27,22 +27,13 @@ export default class App extends React.Component{
               loggedIn: false,
               results: [
                   {
-                    id: '9403930493f',
-                    type: 'Ophthalmologists',
-                    name: 'Dr. Pickle D. Rick', 
-                    address: '680 Haight Street', 
-                    phone: '(917) 704 3031',
-                    language: 'English, Spanish',
-                    rating: '*****'
-                  },
-                  {
-                    id: 'o2394kljl',
-                    type: 'Ophthalmologists',
-                    name: 'Dr. John A. Zoidberg', 
-                    address: '250 George Street', 
-                    phone: '(930) 450 375',
-                    language: 'English',
-                    rating: '****'
+                    id: '',
+                    type: '',
+                    name: '', 
+                    address: '', 
+                    phone: '',
+                    language: '',
+                    rating: ''
                   }
                 ]
         }
