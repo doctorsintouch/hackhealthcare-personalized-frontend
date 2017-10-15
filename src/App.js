@@ -165,6 +165,7 @@ class Results extends React.Component{
   componentDidMount() {
     $.get('http://www.hackhealthcare-personalized.info/results?id=25275')
       .then(result => {
+        console.log(result)
         this.setState({results: result});
       })
   }
