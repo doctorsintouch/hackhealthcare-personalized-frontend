@@ -156,6 +156,7 @@ export default class App extends React.Component{
       console.log(response)
       var hack = response
       return function (hack) {
+        console.log(hack)
         this.setState({
               results: hack
             })
