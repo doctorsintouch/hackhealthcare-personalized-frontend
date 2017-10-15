@@ -163,14 +163,9 @@ class Results extends React.Component{
     $.ajax({
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
       dataType: 'jsonp',
-      jsonp: "callback",
       success: function(response) {
         console.log(response)
       }.bind(this),
-      data: {
-        q: "select title,abstract,url from search.news where query=\"cat\"",
-        format: "json"
-      },
       error: function(xhr, status, err) {
         console.log('error!', xhr, status, err)
         console.error(this.props.url, status, err.toString());
