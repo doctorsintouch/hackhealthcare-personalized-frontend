@@ -99,7 +99,7 @@ export default class App extends React.Component{
 
         $.ajax({
           type: "POST",
-          url: 'http://www.hackhealthcare-personalized.info:3000',
+          url: 'http://www.hackhealthcare-personalized.info:3000/login',
           data: this.state.user,
           dataType: 'json',
           cache: false,
