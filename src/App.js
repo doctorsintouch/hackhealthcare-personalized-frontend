@@ -12,7 +12,7 @@ export default class App extends React.Component{
 
   constructor(props) {
     super(props);
-    var hack
+
     this.state = {
             user: {
               firstname: "",
@@ -154,8 +154,8 @@ export default class App extends React.Component{
 
     receivedData(response){
       console.log(response)
-      hack = response
-      return function (response) {
+      var hack = response
+      return function (hack) {
         this.setState({
               results: hack
             })
