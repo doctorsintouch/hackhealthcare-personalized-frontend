@@ -149,6 +149,10 @@ export default class App extends React.Component{
           })
       }
 
+    receivedData(response){
+      this.state.results = response
+    }
+
 
 
 
@@ -164,6 +168,7 @@ class Results extends React.Component{
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
       dataType: 'json',
       success: function(response) {
+        this.props.receivedData(response)
         console.log(response)
       }.bind(this),
       error: function(xhr, status, err) {
