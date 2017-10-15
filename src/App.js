@@ -122,10 +122,57 @@ export default class App extends React.Component{
             : null
           }
               { this.state.loggedIn ?
-                <Results 
-                results={this.state.results}
-                patient={this.state.user}
-                receivedData={this.receivedData} />
+                <div>
+                  <div class="flex">
+                    <div>
+                      <h1>Ophthalmologists in {this.state.user.firstname}s area </h1>
+                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}s home</button> &nbsp;
+                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
+                    </div>
+                  </div>
+                    <div style={{paddingTop: 50}}>
+                      {this.state.results.map(result => (
+                        <div key={result.id}>
+                          <div class="flex">
+                            <div class="nugget">
+                              <h4>{result.name}</h4>
+                              <p>{result.type}</p>
+                              <p>{result.address}</p>
+                              <p>{result.language}</p>
+                              <p>{result.phone}</p><br />
+                              <button class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></button>&nbsp;&nbsp;
+                              <button class="btn btn-default">Schedule now <span class="glyphicon glyphicon-menu-right"></span></button> &nbsp;
+                              <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span><b> Make Referral</b></button> &nbsp;
+                              
+                            </div>
+                            <div class="nugget">
+                              <iframe style={{border:0, height: 220}} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4 
+                                &q=Space+Needle,Seattle+WA" allowFullScreen>
+                              </iframe><br /><br />
+                            </div>
+                            <div class="nugget">
+                              <b>Avg. Rating</b>
+                              <h5><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></h5>
+                              <br /><br />
+                              <b>Reviews</b>
+                              <p>N/A</p>
+                              <br /> <br />
+                            </div>
+                          </div>
+                          <hr />
+                          </div> ))}
+                      <div style={{marginLeft: 50}}>
+                      <p style={{textAlign: 'right', paddingTop:50}}><button class="btn btn-lg btn-info">
+                        <span class="glyphicon glyphicon-share"></span> Share list with {this.state.user.firstname}
+                      </button>
+                      </p>
+                      </div>
+                    </div>
+                    
+                  </div>
+
+
+                
                 : null
               }
             </div>
@@ -148,6 +195,12 @@ export default class App extends React.Component{
         this.setState({
             loggedIn: true
           })
+        $.get('http://www.hackhealthcare-personalized.info/results?id=25275')
+          .then(result => {
+            console.log(result)
+            this.setState({results: result});
+            console.log(this.state.results)
+          })
       }
 
  
@@ -160,73 +213,6 @@ export default class App extends React.Component{
 
 
 
-class Results extends React.Component{
-
-  componentDidMount() {
-    $.get('http://www.hackhealthcare-personalized.info/results?id=25275')
-      .then(result => {
-        console.log(result)
-        this.setState({results: result});
-        console.log(this.state.results)
-      })
-  }
-
-
-
-  render(){
-
-    return (
-      <div>
-      <div class="flex">
-        <div>
-          <h1>Ophthalmologists in {this.props.patient.firstname}s area </h1>
-          <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.props.patient.firstname}s home</button> &nbsp;
-          <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
-        </div>
-      </div>
-        <div style={{paddingTop: 50}}>
-          {this.props.results.map(result => (
-            <div key={result.id}>
-              <div class="flex">
-                <div class="nugget">
-                  <h4>{result.name}</h4>
-                  <p>{result.type}</p>
-                  <p>{result.address}</p>
-                  <p>{result.language}</p>
-                  <p>{result.phone}</p><br />
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></button>&nbsp;&nbsp;
-                  <button class="btn btn-default">Schedule now <span class="glyphicon glyphicon-menu-right"></span></button> &nbsp;
-                  <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span><b> Make Referral</b></button> &nbsp;
-                  
-                </div>
-                <div class="nugget">
-                  <iframe style={{border:0, height: 220}} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4 
-                    &q=Space+Needle,Seattle+WA" allowFullScreen>
-                  </iframe><br /><br />
-                </div>
-                <div class="nugget">
-                  <b>Avg. Rating</b>
-                  <h5><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></h5>
-                  <br /><br />
-                  <b>Reviews</b>
-                  <p>N/A</p>
-                  <br /> <br />
-                </div>
-              </div>
-              <hr />
-              </div> ))}
-          <div style={{marginLeft: 50}}>
-          <p style={{textAlign: 'right', paddingTop:50}}><button class="btn btn-lg btn-info">
-            <span class="glyphicon glyphicon-share"></span> Share list with {this.props.patient.firstname}
-          </button>
-          </p>
-          </div>
-        </div>
-        
-      </div>
-    )
-  }
-}
 
 
 
