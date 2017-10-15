@@ -57,10 +57,13 @@ export default class App extends React.Component{
           <div>
               { !this.state.loggedIn ?
             <div>
-              <p style={{color: "lightgrey", fontSize: "small"}}>Doctors In Touch: Connecting you to personalized providers</p>
-              <h1>Good afternoon, Dr. Lim!</h1>
-              <div class="flex">
-                <div style={{maxWidth: 300, marginTop: 50}}>
+              <h2 style={{color: "#00ad7e", display: 'inline'}}><b>doctors in touch</b></h2>
+              <h4 style={{color: "#6c6c6c", display: 'inline'}}>&nbsp;&nbsp;&nbsp;Connecting you to personalized providers</h4>
+              <hr />
+              <h4 style={{paddingTop: 50}}><b>&nbsp; &nbsp; Good afternoon</b>, Dr. Lim!</h4>
+              <div class="flex" style={{marginTop: 30}}>
+                <div style={{maxWidth: 300}}>
+
                   <form id="form1">
                     Patient First Name<br />
                     <input
@@ -92,7 +95,7 @@ export default class App extends React.Component{
                     type="submit" 
                     form="form1" 
                     value="Submit"
-                    style={{width: 300}}
+                    style={{width: 300, backgroundColor: '#00ad7e'}}
                     className="submitButton"
                     type="submit"
                     class="btn btn-lg btn-success"
@@ -101,8 +104,8 @@ export default class App extends React.Component{
                     </button>
                   </form>
                 </div>
-                <div class="border" style={{width: 100, marginTop: 50}}></div>
-                <div style={{maxWidth: 300, marginTop: 50}}>
+                <div class="border" style={{width: 100}}></div>
+                <div style={{maxWidth: 300}}>
                   <form>
                     Patient ID<br />
                     <input
@@ -176,7 +179,7 @@ class Results extends React.Component{
 
     $.ajax({
       type: "GET",
-      url: 'http://www.hackhealthcare-personalized.info:3000/results&id=3',
+      url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
       dataType: 'json',
       cache: false,
       success: function(data) {
