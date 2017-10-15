@@ -167,6 +167,7 @@ class Results extends React.Component{
       .then(result => {
         console.log(result)
         this.setState({results: result});
+        console.log(this.state.results)
       })
   }
 
