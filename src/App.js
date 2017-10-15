@@ -150,9 +150,11 @@ export default class App extends React.Component{
       }
 
     receivedData(response){
-      this.setState({
-            results: response
-          })
+      return function () {
+        this.setState({
+              results: response
+            })
+      }.bind(this);
     }
 
 
