@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "gh-pages": "^1.0.0",
-    "homepage": "https://nikodunk.github.io/hackathon-personalized-health/",
+    "homepage": "https://nikodunk.github.io/personalized-health/",
     "jquery": "^3.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
