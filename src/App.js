@@ -11,16 +11,19 @@ export default class App extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-              firstname: "",
-              lastname: '',
-              dobday: '',
-              dobmonth: '',
-              dobyear: '',
-              referrer: '',
-              email: '',
-              phone: '',
+            user: {
+              firstname: "niko",
+              lastname: 'dunk',
+              dobday: '20',
+              dobmonth: '01',
+              dobyear: '1988',
+              referrer: 'george',
+              email: 'n.dunkel@gmail.com',
+              phone: '9177043031',
+              },
               loggedIn: false
             }
+      
   }
 
   componentDidMount() {
@@ -32,27 +35,51 @@ export default class App extends React.Component{
     return (
                   
           <div>
-              <p style={{color: "lightgrey", fontSize: "small"}}>WellBeing: A simple cloud to-do list</p>
+              { !this.state.loggedIn ?
+            <div>
+              <p style={{color: "lightgrey", fontSize: "small"}}>WellBeing: A simple patient referral service</p>
               { !this.state.firstname ? <h1>Hi! What is your name?</h1> : null}
               { this.state.firstname ? <h1>Hi, {this.state.firstname}!</h1> : null}
               <form>
+                first name<br />
                 <input
                   autoFocus
                   type="text"
-                  className="addItemInput"
-                  onSubmit={this.handleUsernameSubmit}
-                  onChange={this.handleUsernameChange('firstname')}
+                  onChange={this.handleUsernameChange('firstname').bind(this)}
                   value={this.state.firstname}
-
+                /><br /><br />
+                last name<br />
+                <input
+                  type="text"
+                  onChange={this.handleUsernameChange('lastname').bind(this)}
+                  value={this.state.lastname}
+                /><br /><br />
+                birthday<br />
+                <input
+                  type="text"
+                  onChange={this.handleUsernameChange('firstname').bind(this)}
+                  value={this.state.dobyear}
+                /><br /><br />
+                email<br />
+                <input
+                  type="text"
+                  onChange={this.handleUsernameChange('firstname').bind(this)}
+                  value={this.state.email}
                 />
                 <input
                   className="submitButton"
                   type="submit"
+                  class="btn btn-success"
                   value="Let's Go!"
-                  onClick={this.handleUsernameSubmit} />
+                  onClick={this.handleUsernameSubmit.bind(this)} />
               </form>
-              <hr />
-              <Results />
+            </div>
+            : null
+          }
+              { this.state.loggedIn ?
+                <Results />
+                : null
+              }
             </div>
     )
   }
@@ -61,7 +88,7 @@ export default class App extends React.Component{
       return function (e) {
         var state = {};
         state.firstname = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
-        this.setState(state);
+        this.setState({firstname: state.firstname});
       }.bind(this);
 
     }
@@ -71,15 +98,12 @@ export default class App extends React.Component{
 
     handleUsernameSubmit(e) {
         e.preventDefault();
+        console.log(this.state.user)
 
-        this.setState({
-              firstname: this.state.firstname,
-              loggedIn: true
-            })
-        console.log(this.state.firstname)
         $.ajax({
           type: "POST",
-          url: 'https://localhost:3000/login',
+          url: 'http://www.hackhealthcare-personalized.info:3000',
+          data: this.state.user,
           dataType: 'json',
           cache: false,
           success: function(data) {
@@ -89,11 +113,12 @@ export default class App extends React.Component{
             console.error(this.props.url, status, err.toString());
           }.bind(this)
         });
+
+        this.setState({
+            loggedIn: true
+          })
+        
       }
-
-
-
-
 
 
 
@@ -123,7 +148,7 @@ class Results extends React.Component{
 
     $.ajax({
       type: "GET",
-      url: 'https://localhost:3000/results',
+      url: 'https://localhost:3000/results&id=3',
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -143,14 +168,27 @@ class Results extends React.Component{
 
     return (
       <div>
-      Results:
-        <ul>
+      <h1>Nephrologists in your area</h1>
+      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of your home</button> &nbsp;
+      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
+        <div style={{paddingTop: 50}}>
           {this.results.map(result => (
-            <li key={result.id}>{result.name}<br />{result.address}<br />{result.phone}<br /><br /></li>
-            
-          ))}
-        </ul>
+            <div key={result.id}>
+              <h4>Nephrologist</h4>
+              <p>{result.name}</p>
+              <p>{result.address}</p>
+              <p>{result.phone}</p><br />
+                <button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Get referral</button> &nbsp;
+                <button class="btn btn-success"><span class="glyphicon glyphicon-time"></span> Schedule now</button>&nbsp;
+                <button class="btn btn-secondary"><span class="glyphicon glyphicon-star"></span></button>
+                <br /><br />
+                <hr />
+            </div>
 
+
+          ))}
+        </div>
+        
       </div>
     )
   }

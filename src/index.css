@@ -1,7 +1,6 @@
 body {
-  margin: 0 auto;
-  padding: 0;
-  max-width: 800px;
-  margin-top: 200px;
+  margin: 0 auto !important;
+  max-width: 800px !important;
+  padding-top: 200px !important;
   font-family: sans-serif;
 }
