@@ -172,7 +172,7 @@ class Results extends React.Component{
     $.ajax({
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
       dataType: 'json',
-      success: function(response) {
+      success: response => {
         this.props.receivedData(response).bind(this)
       }.bind(this),
       error: function(xhr, status, err) {
