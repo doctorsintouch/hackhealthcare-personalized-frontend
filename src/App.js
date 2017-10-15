@@ -150,11 +150,13 @@ export default class App extends React.Component{
       }
 
     receivedData(response){
-      return function () {
+      return function (response) {
+        console.log(response)
         this.setState({
               results: response
             })
       }.bind(this);
+
     }
 
 
@@ -173,7 +175,6 @@ class Results extends React.Component{
       dataType: 'json',
       success: function(response) {
         this.props.receivedData(response)
-        console.log(response)
       }.bind(this),
       error: function(xhr, status, err) {
         console.log('error!', xhr, status, err)
