@@ -23,8 +23,8 @@ export default class App extends React.Component{
               referrer: 'george',
               email: 'n.dunkel@gmail.com',
               phone: '(917) 704 3031',
+              id: '',
               },
-              id: 25275,
               loggedIn: false,
               results: [
                   {
@@ -34,7 +34,8 @@ export default class App extends React.Component{
                     address: '', 
                     phone: '',
                     language: '',
-                    rating: ''
+                    rating: '',
+                    map: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4&q=Space+Needle,Seattle+WA'
                   }
                 ]
         }
@@ -87,27 +88,34 @@ export default class App extends React.Component{
                       value={this.state.email}
                     /> <br /><br />
                     <button 
-                    type="submit" 
                     form="form1" 
-                    value="Submit"
                     style={{width: 300, backgroundColor: '#00ad7e'}}
                     className="submitButton"
                     type="submit"
                     class="btn btn-lg btn-success"
                     onClick={this.handleUsernameSubmit.bind(this)}>
-                      <b>Refer {this.state.user.firstname} {this.state.user.lastname}</b>
+                      <b>Refer Patient {this.state.user.firstname} {this.state.user.lastname}</b>
                     </button>
                   </form>
                 </div>
                 <div class="border" style={{width: 100}}></div>
                 <div style={{maxWidth: 300}}>
-                  <form>
+                  <form form="form2">
                     Patient ID<br />
                     <input
                       type="text"
+                      onChange={this.handleIdChange('id').bind(this)}
                       class="form-control"
                     /><br /><br />
                   </form>
+                  <button 
+                    form="form2" 
+                    style={{width: 300, backgroundColor: '#00ad7e'}}
+                    className="submitButton"
+                    class="btn btn-lg btn-success"
+                    onClick={this.handleIdSubmit.bind(this)}>
+                      <b>Refer Patient # {this.state.user.id}</b>
+                  </button>
                 </div>
               </div>
             </div>
@@ -138,8 +146,7 @@ export default class App extends React.Component{
                               
                             </div>
                             <div class="nugget">
-                              <iframe style={{border:0, height: 220}} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4 
-                                &q=Space+Needle,Seattle+WA" allowFullScreen>
+                              <iframe style={{border:0, height: 220}} src={result.map} allowFullScreen>
                               </iframe><br /><br />
                             </div>
                             <div class="nugget">
@@ -181,13 +188,37 @@ export default class App extends React.Component{
       }.bind(this);
     }
 
+    handleIdChange () {
+      return function (e) {
+        var user = {};
+        user.id = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+        this.setState({
+            user: user
+          })
+      }.bind(this);
+    }
+
 
     handleUsernameSubmit(e) {
         e.preventDefault();
         this.setState({
             loggedIn: true
           })
-        var url = 'http://www.hackhealthcare-personalized.info/results?id=' + this.state.id
+        var url = 'http://www.hackhealthcare-personalized.info/results?id=25275'
+        $.get(url)
+          .then(result => {
+            console.log(result)
+            this.setState({results: result});
+            console.log(this.state.results)
+          })
+      }
+
+    handleIdSubmit(e) {
+        e.preventDefault();
+        this.setState({
+            loggedIn: true
+          })
+        var url = 'http://www.hackhealthcare-personalized.info/results?id=' + this.state.user.id
         $.get(url)
           .then(result => {
             console.log(result)
