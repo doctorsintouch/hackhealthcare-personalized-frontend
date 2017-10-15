@@ -142,21 +142,7 @@ export default class App extends React.Component{
 
     handleUsernameSubmit(e) {
         e.preventDefault();
-        console.log(this.state.user)
-
-        $.ajax({
-          type: "POST",
-          url: 'http://www.hackhealthcare-personalized.info:3000/login',
-          data: this.state.user,
-          dataType: 'json',
-          cache: false,
-          success: function(data) {
-            console.log(data)
-          }.bind(this),
-          error: function(xhr, status, err) {
-            console.error(this.props.url, status, err.toString());
-          }.bind(this)
-        });
+        
 
         this.setState({
             loggedIn: true
@@ -174,20 +160,22 @@ export default class App extends React.Component{
 class Results extends React.Component{
 
   componentDidMount() {
-
     $.ajax({
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
       dataType: 'jsonp',
+      jsonp: "callback",
       success: function(response) {
         console.log(response)
       }.bind(this),
+      data: {
+        q: "select title,abstract,url from search.news where query=\"cat\"",
+        format: "json"
+      },
       error: function(xhr, status, err) {
         console.log('error!', xhr, status, err)
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
-
-    console.log('these are the rulsts outside of the calss')
   }
 
 
@@ -213,14 +201,15 @@ class Results extends React.Component{
                   <p>{result.address}</p>
                   <p>{result.language}</p>
                   <p>{result.phone}</p><br />
-                  <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span> Make Referral</button> &nbsp;
-                  <button class="btn btn-default"><span class="glyphicon glyphicon-menu-right"></span>Schedule now</button> &nbsp;
+                  <button class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></button>&nbsp;&nbsp;
+                  <button class="btn btn-default">Schedule now <span class="glyphicon glyphicon-menu-right"></span></button> &nbsp;
+                  <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span><b> Make Referral</b></button> &nbsp;
+                  
                 </div>
                 <div class="nugget">
-                  <iframe style={{border:0}} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4 
+                  <iframe style={{border:0, height: 220}} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4 
                     &q=Space+Needle,Seattle+WA" allowFullScreen>
                   </iframe><br /><br />
-                  <button style={{backgroundColor: 'pink'}} class="btn btn-secondary"><span class="glyphicon glyphicon-heart"></span></button>
                 </div>
                 <div class="nugget">
                   <b>Avg. Rating</b>
@@ -228,6 +217,7 @@ class Results extends React.Component{
                   <br /><br />
                   <b>Reviews</b>
                   <p>N/A</p>
+                  <br /> <br />
                 </div>
               </div>
               <hr />
