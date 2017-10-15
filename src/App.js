@@ -154,13 +154,9 @@ export default class App extends React.Component{
 
     receivedData(response){
       console.log(response)
-      var hack = response
-      return function (hack) {
-        console.log('this runs')
-        this.setState({
+      this.setState({
               results: hack
             })
-      }.bind(this);
 
     }
 
