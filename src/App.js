@@ -51,19 +51,16 @@ export default class App extends React.Component{
                 last name<br />
                 <input
                   type="text"
-                  onChange={this.handleUsernameChange('lastname').bind(this)}
                   value={this.state.lastname}
                 /><br /><br />
                 birthday<br />
                 <input
-                  type="text"
-                  onChange={this.handleUsernameChange('firstname').bind(this)}
+                  type="date"
                   value={this.state.dobyear}
                 /><br /><br />
                 email<br />
                 <input
-                  type="text"
-                  onChange={this.handleUsernameChange('firstname').bind(this)}
+                  type="email"
                   value={this.state.email}
                 />
                 <input
@@ -132,13 +129,15 @@ class Results extends React.Component{
   results = [
         {
           id: '9403930493f',
-          name: 'dr. robert', 
+          type: 'Nephrologist',
+          name: 'Dr. Nice Person', 
           address: '680 Haight Street', 
           phone: '9177043031'
         },
         {
           id: 'o2394kljl',
-          name: 'dr. george', 
+          type: 'Onconephrologist',
+          name: 'Dr. Steven George', 
           address: '250 George Street', 
           phone: '930450375'
         }
@@ -173,16 +172,22 @@ class Results extends React.Component{
       <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
         <div style={{paddingTop: 50}}>
           {this.results.map(result => (
-            <div key={result.id}>
-              <h4>Nephrologist</h4>
-              <p>{result.name}</p>
-              <p>{result.address}</p>
-              <p>{result.phone}</p><br />
-                <button class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Get referral</button> &nbsp;
-                <button class="btn btn-success"><span class="glyphicon glyphicon-time"></span> Schedule now</button>&nbsp;
+            <div key={result.id} style={{maxWidth: 900}}>
+              <div style={{float: 'right'}}>
+                <iframe style={{border:0}} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4 
+                  &q=Space+Needle,Seattle+WA" allowfullscreen>
+                </iframe>
+              </div>
+              <div >
+                <h4>{result.name}</h4>
+                <p>{result.type}</p>
+                <p>{result.address}</p>
+                <p>Languages: English</p>
+                <p>{result.phone}</p><br />
+                <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span> Get referral</button> &nbsp;
                 <button class="btn btn-secondary"><span class="glyphicon glyphicon-star"></span></button>
-                <br /><br />
-                <hr />
+              </div>
+              <hr />
             </div>
 
 
