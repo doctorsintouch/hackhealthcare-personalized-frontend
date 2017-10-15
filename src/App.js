@@ -145,8 +145,6 @@ export default class App extends React.Component{
 
     handleUsernameSubmit(e) {
         e.preventDefault();
-        
-
         this.setState({
             loggedIn: true
           })
@@ -175,7 +173,7 @@ class Results extends React.Component{
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
       dataType: 'json',
       success: function(response) {
-        this.props.receivedData(response)
+        this.props.receivedData(response).bind(this)
       }.bind(this),
       error: function(xhr, status, err) {
         console.log('error!', xhr, status, err)
