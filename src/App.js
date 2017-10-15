@@ -24,7 +24,7 @@ export default class App extends React.Component{
               email: 'n.dunkel@gmail.com',
               phone: '(917) 704 3031',
               },
-              id: 25275
+              id: 25275,
               loggedIn: false,
               results: [
                   {
