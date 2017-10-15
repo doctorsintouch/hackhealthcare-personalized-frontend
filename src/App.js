@@ -151,7 +151,7 @@ export default class App extends React.Component{
           dataType: 'json',
           cache: false,
           success: function(data) {
-            this.results = data
+            console.log(data)
           }.bind(this),
           error: function(xhr, status, err) {
             console.error(this.props.url, status, err.toString());
@@ -164,9 +164,7 @@ export default class App extends React.Component{
       }
 
 
-      receivedData(data){
-        console.log(data)
-      }
+
 
 }
 
@@ -178,19 +176,18 @@ class Results extends React.Component{
   componentDidMount() {
 
     $.ajax({
-      type: "GET",
       url: 'http://www.hackhealthcare-personalized.info/results?id=25275',
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.props.receivedData(data)
+      dataType: 'jsonp',
+      success: function(response) {
+        console.log(response)
       }.bind(this),
       error: function(xhr, status, err) {
+        console.log('error!', xhr, status, err)
         console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
 
-    this.props.receivedData('onetwothree')
+    console.log('these are the rulsts outside of the calss')
   }
 
 
