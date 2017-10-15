@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'; 
 
-const hack = []
+
 
 export default class App extends React.Component{
 
@@ -12,6 +12,7 @@ export default class App extends React.Component{
 
   constructor(props) {
     super(props);
+    var hack
     this.state = {
             user: {
               firstname: "",
