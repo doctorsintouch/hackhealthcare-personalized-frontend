@@ -143,7 +143,7 @@ export default class App extends React.Component{
                             </div>
                             <div class="nugget">
                               <b>Avg. Rating</b>
-                              <h5><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span></h5>
+                              <h5>{result.rating}</h5>
                               <br /><br />
                               <b>Reviews</b>
                               <p>N/A</p>
