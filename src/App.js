@@ -186,7 +186,8 @@ export default class App extends React.Component{
         this.setState({
             loggedIn: true
           })
-        $.get('http://www.hackhealthcare-personalized.info/results?id=25275')
+        var url = 'http://www.hackhealthcare-personalized.info/results?id=25275'
+        $.get(url)
           .then(result => {
             console.log(result)
             this.setState({results: result});
