@@ -125,8 +125,8 @@ export default class App extends React.Component{
                 <div>
                   <div class="flex">
                     <div>
-                      <h1>Ophthalmologists in {this.state.user.firstname}s area </h1>
-                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}s home</button> &nbsp;
+                      <h1>Ophthalmologists in {this.state.user.firstname}{this.state.user.id}s area </h1>
+                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}{this.state.user.id}s home</button> &nbsp;
                       <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ export default class App extends React.Component{
                           </div> ))}
                       <div style={{marginLeft: 50}}>
                       <p style={{textAlign: 'right', paddingTop:50}}><button class="btn btn-lg btn-info">
-                        <span class="glyphicon glyphicon-share"></span> Share list with {this.state.user.firstname}
+                        <span class="glyphicon glyphicon-share"></span> Share list with {this.state.user.firstname}{this.state.user.id}
                       </button>
                       </p>
                       </div>
