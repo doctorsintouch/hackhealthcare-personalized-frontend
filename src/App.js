@@ -14,7 +14,7 @@ export default class App extends React.Component{
     super(props);
 
     this.state = {
-            user: {
+              user: {
               firstname: "",
               lastname: "",
               dobday: '20',
@@ -24,6 +24,7 @@ export default class App extends React.Component{
               email: 'n.dunkel@gmail.com',
               phone: '(917) 704 3031',
               },
+              id: 25275
               loggedIn: false,
               results: [
                   {
@@ -186,7 +187,7 @@ export default class App extends React.Component{
         this.setState({
             loggedIn: true
           })
-        var url = 'http://www.hackhealthcare-personalized.info/results?id=25275'
+        var url = 'http://www.hackhealthcare-personalized.info/results?id=' + this.state.id
         $.get(url)
           .then(result => {
             console.log(result)
