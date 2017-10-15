@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'; 
 
+const hack = []
+
 export default class App extends React.Component{
 
   onError(error){
@@ -151,10 +153,10 @@ export default class App extends React.Component{
 
     receivedData(response){
       console.log(response)
+      hack = response
       return function (response) {
-        
         this.setState({
-              results: response
+              results: hack
             })
       }.bind(this);
 
