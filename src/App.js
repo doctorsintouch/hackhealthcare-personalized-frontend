@@ -35,7 +35,7 @@ export default class App extends React.Component{
                     phone: '',
                     language: '',
                     rating: '',
-                    map: 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBz8soRKrBNMALn5zTxtH2grSVPbi2nSK4&q=Space+Needle,Seattle+WA'
+                    map: ''
                   }
                 ]
         }
@@ -125,8 +125,8 @@ export default class App extends React.Component{
                 <div>
                   <div class="flex">
                     <div>
-                      <h1>Ophthalmologists in {this.state.user.firstname}{this.state.user.id}s area </h1>
-                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}{this.state.user.id}s home</button> &nbsp;
+                      <h1>Ophthalmologists in the area {this.state.user.firstname}</h1>
+                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}</button> &nbsp;
                       <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
                     </div>
                   </div>
@@ -162,7 +162,7 @@ export default class App extends React.Component{
                           </div> ))}
                       <div style={{marginLeft: 50}}>
                       <p style={{textAlign: 'right', paddingTop:50}}><button class="btn btn-lg btn-info">
-                        <span class="glyphicon glyphicon-share"></span> Share list with {this.state.user.firstname}{this.state.user.id}
+                        <span class="glyphicon glyphicon-share"></span> Share list with {this.state.user.firstname}
                       </button>
                       </p>
                       </div>
@@ -226,12 +226,6 @@ export default class App extends React.Component{
             console.log(this.state.results)
           })
       }
-
- 
-
-
-
-
 }
 
 
