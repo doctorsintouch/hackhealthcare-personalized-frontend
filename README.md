@@ -1,4 +1,6 @@
-This project is the front-end of the team effort at the October 2017 http://www.health2sf.com/ (https://github.com/health20sf/hackhealthcare) event.
+This is the React front-end code of the October 2017 HackHealthcare https://github.com/health20sf/hackhealthcare hackathon at Google Launchpad in SF.
+
+The project won second place (https://twitter.com/athenaMDP/status/920040653563875328)
 
 Team: Steven Pease, Nicholas Dunkel, Chandni J Purohit, Usman Raza, Zahra Tashakorinia, Kelly Ling, Patrick Scripilliti
 
