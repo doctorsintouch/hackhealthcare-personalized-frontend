@@ -15,14 +15,14 @@ export default class App extends React.Component{
 
     this.state = {
               user: {
-              firstname: "",
-              lastname: "",
-              dobday: '20',
-              dobmonth: '01',
-              dobyear: '1988',
-              referrer: 'george',
-              email: 'n.dunkel@gmail.com',
-              phone: '(917) 704 3031',
+              firstname: '',
+              lastname: '',
+              dobday: '',
+              dobmonth: '',
+              dobyear: '',
+              referrer: '',
+              email: '',
+              phone: '',
               id: '',
               },
               loggedIn: false,
@@ -49,7 +49,6 @@ export default class App extends React.Component{
 
   render(){
     return (
-                  
           <div>
               { !this.state.loggedIn ?
             <div>
