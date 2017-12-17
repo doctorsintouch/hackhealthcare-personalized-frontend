@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import $ from 'jquery'; 
+import $ from 'jquery';
 
 
 
@@ -30,8 +30,8 @@ export default class App extends React.Component{
                   {
                     id: '',
                     type: '',
-                    name: '', 
-                    address: '', 
+                    name: '',
+                    address: '',
                     phone: '',
                     language: '',
                     rating: '',
@@ -39,12 +39,12 @@ export default class App extends React.Component{
                   }
                 ]
         }
-      
+
   }
 
   componentDidMount() {
-    
-  } 
+
+  }
 
 
   render(){
@@ -53,7 +53,7 @@ export default class App extends React.Component{
               { !this.state.loggedIn ?
             <div>
               <h2 style={{color: "#00ad7e", display: 'inline'}}><b>doctors in touch</b></h2>
-              <h4 style={{color: "#6c6c6c", display: 'inline'}}>&nbsp;&nbsp;&nbsp;Connecting you to personalized providers</h4>
+              <h4 style={{color: "#6c6c6c", display: 'inline'}}>&nbsp;&nbsp;&nbsp;Delivering personalized referrals</h4>
               <hr />
               <h4 style={{paddingTop: 50}}><b>&nbsp; &nbsp; Good afternoon</b>, Dr. Lim!</h4>
               <div class="flex" style={{marginTop: 30}}>
@@ -80,20 +80,14 @@ export default class App extends React.Component{
                       class="form-control"
                       value={this.state.dobyear}
                     /><br /><br />
-                    Email<br />
-                    <input
-                      type="email"
-                      class="form-control"
-                      value={this.state.email}
-                    /> <br /><br />
-                    <button 
-                    form="form1" 
+                    <button
+                    form="form1"
                     style={{width: 300, backgroundColor: '#00ad7e'}}
                     className="submitButton"
                     type="submit"
                     class="btn btn-lg btn-success"
-                    onClick={this.handleUsernameSubmit.bind(this)}>
-                      <b>Refer Patient {this.state.user.firstname} {this.state.user.lastname}</b>
+                    onClick={this.handleSubmit.bind(this)}>
+                      <b>Find a Specialist</b>
                     </button>
                   </form>
                 </div>
@@ -107,13 +101,13 @@ export default class App extends React.Component{
                       class="form-control"
                     /><br /><br />
                   </form>
-                  <button 
-                    form="form2" 
+                  <button
+                    form="form2"
                     style={{width: 300, backgroundColor: '#00ad7e'}}
                     className="submitButton"
                     class="btn btn-lg btn-success"
-                    onClick={this.handleIdSubmit.bind(this)}>
-                      <b>Refer Patient # {this.state.user.id}</b>
+                    onClick={this.handleSubmit.bind(this)}>
+                      <b>Find a Specialist</b>
                   </button>
                 </div>
               </div>
@@ -122,10 +116,13 @@ export default class App extends React.Component{
           }
               { this.state.loggedIn ?
                 <div>
+                  <h2 style={{color: "#00ad7e", display: 'inline'}}><b>doctors in touch</b></h2>
+                  <h4 style={{color: "#6c6c6c", display: 'inline'}}>&nbsp;&nbsp;&nbsp;Delivering personalized referrals</h4>
+                  <hr />
                   <div class="flex">
                     <div>
-                      <h1>Ophthalmologists in the area {this.state.user.firstname}</h1>
-                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}</button> &nbsp;
+                      <h1>Gastroenterologists in {this.state.user.firstname}{this.state.user.id}&apos;s area </h1>
+                      <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Location: within 1 mile of {this.state.user.firstname}{this.state.user.id}&apos;s home</button> &nbsp;
                       <button style={{display: 'inline'}} class="btn btn-default"><span class="glyphicon glyphicon-remove"></span> Insurance: covered by Aetna</button>
                     </div>
                   </div>
@@ -142,7 +139,7 @@ export default class App extends React.Component{
                               <button class="btn btn-default"><span class="glyphicon glyphicon-heart"></span></button>&nbsp;&nbsp;
                               <button class="btn btn-default">Schedule now <span class="glyphicon glyphicon-menu-right"></span></button> &nbsp;
                               <button class="btn btn-success"><span class="glyphicon glyphicon-check"></span><b> Make Referral</b></button> &nbsp;
-                              
+
                             </div>
                             <div class="nugget">
                               <iframe style={{border:0, height: 220}} src={result.map} allowFullScreen>
@@ -166,11 +163,11 @@ export default class App extends React.Component{
                       </p>
                       </div>
                     </div>
-                    
+
                   </div>
 
 
-                
+
                 : null
               }
             </div>
@@ -197,13 +194,30 @@ export default class App extends React.Component{
       }.bind(this);
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        this.setState({
+            loggedIn: true
+          })
+        var url = 'http://www.doctorsintouch.health/results?id=37';
+        if(this.state.user.id) {
+            url = 'http://www.doctorsintouch.health/results?id=' + this.state.user.id
+        }
+        $.get(url)
+          .then(result => {
+            console.log(result)
+            this.setState({results: result});
+            console.log(this.state.results)
+          })
+      }
+
 
     handleUsernameSubmit(e) {
         e.preventDefault();
         this.setState({
             loggedIn: true
           })
-        var url = 'http://www.hackhealthcare-personalized.info/results?id=37'
+        var url = 'http://www.doctorsintouch.health/results?id=37'
         $.get(url)
           .then(result => {
             console.log(result)
@@ -217,7 +231,7 @@ export default class App extends React.Component{
         this.setState({
             loggedIn: true
           })
-        var url = 'http://www.hackhealthcare-personalized.info/results?id=' + this.state.user.id
+        var url = 'http://www.doctorsintouch.health/results?id=' + this.state.user.id
         $.get(url)
           .then(result => {
             console.log(result)
